@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -10,7 +11,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://admin:digaf2025@127.0.0.1:27017/videoKYC?authSource=videoKYC', {
+const uri = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}` +
+            `@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}?authSource=${process.env.MONGO_DB}`;
+
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
