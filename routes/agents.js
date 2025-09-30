@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const authRole = require('../middleware/authRole');
 
-// Register new agent (admin only)
+// Register new agent
 router.post('/register', authRole(['admin']), async (req, res) => {
     const { username, password, role } = req.body;
     if (!username || !password || !role) return res.status(400).json({ success: false, error: "All fields required" });
@@ -22,7 +22,7 @@ router.post('/register', authRole(['admin']), async (req, res) => {
     }
 });
 
-// List all agents (admin only)
+// List all agents
 router.get('/', authRole(['admin']), async (req, res) => {
     try {
         const users = await User.find({ role: 'agent' }, { password: 0 });
@@ -33,7 +33,7 @@ router.get('/', authRole(['admin']), async (req, res) => {
     }
 });
 
-// Toggle agent active status (admin only)
+// Toggle agent active status
 router.patch('/:id/toggle', authRole(['admin']), async (req, res) => {
     try {
         const user = await User.findById(req.params.id);

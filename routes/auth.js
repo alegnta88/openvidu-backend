@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const SECRET_KEY = "YOUR_SECRET_KEY";
+const SECRET_KEY = "";
 
 // Login
 router.post('/login', async (req, res) => {
